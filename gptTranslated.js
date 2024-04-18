@@ -121,10 +121,10 @@ class State {
   constructor(visibleCards, startSetup, { myLeftTrains, enemyLeftTrains }) {
     this.visibleCards = visibleCards;
     this.myCards = Object.fromEntries(Object.keys(COLORS_MAPPING).map(color => [color, 0]));
-    Object.entries(startSetup).forEach(([color, number]) => this.myCards[color] = number);
     this.myUsedCards = { ...this.myCards };
-    this.enemyCards = { ...this.myCards, Unknown: 0 };
     this.enemyUsedCards = { ...this.myCards };
+    this.enemyCards = { ...this.myCards, 'Unknown': 0 };
+    Object.entries(startSetup).forEach(([color, number]) => this.myCards[color] = number);
     this.enemyLeftTrains = enemyLeftTrains;
     this.myLeftTrains = myLeftTrains;
   }
@@ -148,8 +148,8 @@ class State {
   enemyCardUse({ color, length, locomotives = 0 }) {
     const colorLength = length - locomotives;
     this.enemyUsedCards[color] += colorLength;
-    this.enemyCards[color] = Math.max(this.enemyCards[color] - colorLength, 0);
     this.enemyCards.Unknown -= colorLength - this.enemyCards[color];
+    this.enemyCards[color] = Math.max(this.enemyCards[color] - colorLength, 0);
     this.enemyUsedCards.Locomotive += locomotives;
   }
 
@@ -489,17 +489,6 @@ h = {
   }
 } ; 0
 
-const packets = h.data.data.map(entry => PacketFactory.create(entry));
-const actionablePackets = packets.filter(packet => [ClaimedRoute, TrainCarPicked].includes(packet.constructor));
-const globalPackets = actionablePackets.filter(packet => packet.global());
-const myPackets = actionablePackets.filter(packet => !packet.global());
-
-myPackets.forEach(packet => {
-  const index = globalPackets.findIndex(gPacket => gPacket.moveId() === packet.moveId());
-  globalPackets[index] = packet;
-});
-
-const readyPackets = globalPackets;
 const visibleCards = {
   Locomotive: 1,
   Red: 2,
@@ -510,6 +499,18 @@ const startSetup = {
   Orange: 1,
   Red: 2
 };
+
+const packets = h.data.data.map(entry => PacketFactory.create(entry));
+const actionablePackets = packets.filter(packet => [classes.ClaimedRoute, classes.TrainCarPicked].includes(packet.constructor));
+const globalPackets = actionablePackets.filter(packet => packet.global());
+const myPackets = actionablePackets.filter(packet => !packet.global());
+
+myPackets.forEach(packet => {
+  const index = globalPackets.findIndex(gPacket => gPacket.moveId() === packet.moveId());
+  globalPackets[index] = packet;
+});
+const readyPackets = globalPackets;
+
 const state = new State(visibleCards, startSetup, { myLeftTrains: 27, enemyLeftTrains: 29 });
 
 readyPackets.forEach(packet => packet.call(state));
