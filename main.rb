@@ -6,6 +6,8 @@ require 'active_support'
 require "active_support/core_ext/array"
 require "active_support/core_ext/hash"
 
+DECK_CARDS_NO = 110
+
 input = JSON.load_file('historyData.json').deep_symbolize_keys!
 
 packets = input.dig(:data,:data).map { |entry| PacketFactory.create entry }
@@ -43,4 +45,7 @@ state = State.new(visible_cards, start_setup, my_left_trains: 27, enemy_left_tra
 
 ready_packets.each { |packet| packet.call state }
 
-state.output_current_state
+state.check_valid
+puts state.export_to_excel
+puts "enemy is #{ready_packets.detect { |packet| !packet.me?}.player}"
+puts "Game/Table id is #{ready_packets.first.table_id}"

@@ -1,4 +1,3 @@
-DECK_CARDS_NO = 110
 COLORS_MAPPING = {
     Locomotive: 0,
     Blue: 3,
@@ -16,7 +15,8 @@ class State
   def initialize(visible_cards, start_setup, my_left_trains: , enemy_left_trains:)
     @visible_cards = visible_cards
     @my_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
-    start_setup.each { |color, number| my_cards[color] = number }
+    @start_setup = start_setup
+    @start_setup.each { |color, number| my_cards[color] = number }
     @my_used_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
 
     @enemy_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
@@ -60,13 +60,35 @@ class State
 
   def output_current_state
     p self
-    puts "My Cards used: #{my_used_cards.values.sum}"
-    puts "My Cards in hand: #{my_cards.values.sum}"
-    puts "Enemy Cards used: #{enemy_used_cards.values.sum}"
-    puts "Enemy Cards in hand: #{enemy_cards.values.sum}"
+    puts "Verify: My Cards in hand: #{my_cards.values.sum}"
+    puts "Verify: Enemy Cards in hand: #{enemy_cards.values.sum}"
+  end
+
+  def check_valid
+    puts "Verify: My Cards used: #{my_used_cards.values.sum}"
+    puts "Verify: Enemy Cards used: #{enemy_used_cards.values.sum}"
+    valid_card_trains_and_used_cards =
+      45 * 2 - (my_left_trains + enemy_left_trains) == my_used_cards.values.sum + enemy_used_cards.values.sum
+    puts 'All Valid, based on number of trains and log' if valid_card_trains_and_used_cards
+  end
+
+  def export_to_excel
+    output = []
+    COLORS_MAPPING.each do |color, _|
+      row = [
+        my_used_cards[color] + enemy_used_cards[color],
+        start_setup[color] || '',
+        my_cards[color],
+        enemy_cards[color],
+      ]
+      output << row.join("\t")
+    end
+    output.join "\n"
   end
 
   private
 
-  attr_reader :enemy_cards, :enemy_used_cards,  :enemy_used_cards,  :enemy_left_trains,  :my_left_trains, :my_cards, :my_used_cards
+  attr_reader :enemy_cards, :enemy_used_cards,  :enemy_left_trains,
+              :my_left_trains, :my_cards, :my_used_cards,
+              :start_setup
 end

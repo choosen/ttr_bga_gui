@@ -36,11 +36,15 @@ class BasePacket
     !global? || player == MY_NAME
   end
 
-  private
-
   def player
     data.dig(:args, :player_name)
   end
+
+  def table_id
+    packet_data.table_id
+  end
+
+  private
 
   attr_reader :packet_data
 
