@@ -77,9 +77,9 @@ class State
     COLORS_MAPPING.each do |color, _|
       row = [
         my_used_cards[color] + enemy_used_cards[color],
-        start_setup[color] || '',
         my_cards[color],
         enemy_cards[color],
+        visible_cards[color] || '',
       ]
       output << row.join("\t")
     end

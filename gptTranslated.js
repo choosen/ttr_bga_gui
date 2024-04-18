@@ -50,6 +50,10 @@ classes.BasePacket = class {
     return this.data().args.player_name;
   }
 
+  table_id() {
+    return this.packet_data.table_id
+  }
+
   data() {
     if (this.packetData.data.length > 1) {
       throw new Error(`we do not handle multiple data in packet: ${this.packetData}`);
@@ -159,10 +163,30 @@ class State {
 
   outputCurrentState() {
     console.log(this);
-    console.log(`My Cards used: ${Object.values(this.myUsedCards).reduce((acc, val) => acc + val, 0)}`);
-    console.log(`My Cards in hand: ${Object.values(this.myCards).reduce((acc, val) => acc + val, 0)}`);
+    // console.log(`Enemy Cards in hand: ${Object.values(this.enemyCards).reduce((acc, val) => acc + val, 0)}`);
+    // console.log(`Verify: Enemy Cards used: ${enemy_used_cards.values.sum}`)
+  }
+
+  checkValid() {
     console.log(`Enemy Cards used: ${Object.values(this.enemyUsedCards).reduce((acc, val) => acc + val, 0)}`);
-    console.log(`Enemy Cards in hand: ${Object.values(this.enemyCards).reduce((acc, val) => acc + val, 0)}`);
+    console.log(`My Cards in hand: ${Object.values(this.myCards).reduce((acc, val) => acc + val, 0)}`);
+    console.log(`My Cards used: ${Object.values(this.myUsedCards).reduce((acc, val) => acc + val, 0)}`);
+    const valid_card_trains_and_used_cards =
+      45 * 2 - (this.myLeftTrains + this.enemyLeftTrains) === Object.values(this.myUsedCards).reduce((acc, val) => acc + val, 0) +
+        Object.values(this.enemyUsedCards).reduce((acc, val) => acc + val, 0)
+    if (valid_card_trains_and_used_cards) console.log('All Valid, based on number of trains and log');
+  }
+
+  // #jump
+  export_to_excel() {
+    return Object.keys(COLORS_MAPPING).map(color =>
+      [
+        this.myUsedCards[color] + this.enemyUsedCards[color],
+        this.myCards[color],
+        this.enemyCards[color],
+        this.visibleCards[color],
+      ].join("\t")
+    ).join("\n")
   }
 }
 
@@ -2329,17 +2353,6 @@ input = {
   }
 };
 
-const visibleCards = {
-  Locomotive: 1,
-  Red: 2,
-  Orange: 2
-};
-const startSetup = {
-  Locomotive: 1,
-  Orange: 1,
-  Red: 2
-};
-
 const packets = input.data.data.map(entry => PacketFactory.create(entry));
 const actionablePackets = packets.filter(packet => [classes.ClaimedRoute, classes.TrainCarPicked].includes(packet.constructor));
 const globalPackets = actionablePackets.filter(packet => packet.global());
@@ -2351,8 +2364,21 @@ myPackets.forEach(packet => {
 });
 const readyPackets = globalPackets;
 
+const visibleCards = {
+  Locomotive: 1,
+  Red: 2,
+  Orange: 2
+};
+const startSetup = {
+  Locomotive: 1,
+  Orange: 1,
+  Red: 2
+};
+
 const state = new State(visibleCards, startSetup, { myLeftTrains: 27, enemyLeftTrains: 27 });
-console.log(JSON.stringify(state));
+// console.log(JSON.stringify(state));
 
 readyPackets.forEach(packet => packet.call(state));
-state.outputCurrentState();
+// state.outputCurrentState();
+state.checkValid()
+console.log(state.export_to_excel())
