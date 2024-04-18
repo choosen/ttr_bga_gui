@@ -20,7 +20,7 @@ class State
     @my_used_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
 
     @enemy_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
-    @enemy_cards[:Unknown] = 0
+    @enemy_cards[:Unknown] = 4
     @enemy_used_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
     @enemy_left_trains = enemy_left_trains
     @my_left_trains = my_left_trains
@@ -28,11 +28,12 @@ class State
 
   def enemy_take_card(color: :Unknown)
     enemy_cards[color] += 1
+    # p enemy_cards
   end
 
   def my_take_card(color:)
     my_cards[color] += 1
-    p my_cards
+    # p my_cards
   end
 
   def my_card_use(color:, length:, locomotives: 0)
@@ -40,15 +41,21 @@ class State
     my_used_cards[color] += color_length
     my_cards[color] -= color_length
     my_used_cards[:Locomotive] += locomotives
+    my_cards[:Locomotive] -= locomotives
   end
 
   def enemy_card_use(color:, length:, locomotives: 0)
     color_length = length - locomotives
+
     enemy_used_cards[color] += color_length
-    color_value_before = enemy_cards[color]
-    enemy_cards[color] = enemy_cards[color] > color_length ? enemy_cards[color] - color_length : 0
-    enemy_cards[:Unknown] -= color_length - color_value_before
     enemy_used_cards[:Locomotive] += locomotives
+
+    color_card_known = [enemy_cards[color], color_length].min
+    locomotives_known = [enemy_cards[:Locomotive], locomotives].min
+    enemy_cards[color] -= color_card_known
+    enemy_cards[:Locomotive] -= locomotives_known
+    enemy_cards[:Unknown] -= length - color_card_known - locomotives_known
+    # p enemy_cards, enemy_used_cards
   end
 
   def output_current_state
