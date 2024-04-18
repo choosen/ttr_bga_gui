@@ -61,8 +61,8 @@ classes.BasePacket = class {
 // class ClaimedRoute extends BasePacket {
 classes.ClaimedRoute = class extends classes.BasePacket {
   call(state) {
-    const { length: routeLength, colors: colors_a } = this.data().args;
-    const locomotives = colors_a.filter(color => color === COLORS_MAPPING.Locomotive).length;
+    const { number: routeLength, colors: colors_a } = this.data().args;
+    const locomotives = colors_a.filter(color => color === COLORS_MAPPING.Locomotive)?.length || 0;
     const colorNumber = colors_a.find(color => color !== COLORS_MAPPING.Locomotive) || COLORS_MAPPING.Locomotive;
     const color = NUMBER_TO_COLORS_MAPPING[colorNumber];
 
@@ -91,7 +91,6 @@ classes.TrainCarPicked = class extends classes.BasePacket {
       }
     } else {
       if (color !== undefined) {
-        console.log(NUMBER_TO_COLORS_MAPPING[color], this.data().args);
         return state.enemyTakeCard(NUMBER_TO_COLORS_MAPPING[color]);
       } else {
         if (count === 2) {
@@ -109,7 +108,6 @@ classes.SimpleNote = class extends classes.BasePacket {
     console.log(this.data().log);
   }
 }
-
 
 // class DestinationsPicked extends BasePacket {
 classes.DestinationsPicked = class extends classes.BasePacket {
@@ -132,12 +130,10 @@ class State {
 
   enemyTakeCard(color = 'Unknown') {
     this.enemyCards[color]++;
-    console.log(this.enemyCards);
   }
 
   myTakeCard(color) {
     this.myCards[color]++;
-    // console.log(this.myCards);
   }
 
   myCardUse({ color, length, locomotives = 0 }) {
@@ -156,13 +152,9 @@ class State {
     const color_card_known = Math.min(this.enemyCards[color], colorLength);
     const locomotives_known = Math.min(this.enemyCards.Locomotive, locomotives);
 
-    console.log(JSON.stringify(this.enemyCards));
     this.enemyCards[color] -= color_card_known;
-    console.log(JSON.stringify(this.enemyCards));
     this.enemyCards.Locomotive -= locomotives_known;
-    console.log(JSON.stringify(this.enemyCards));
     this.enemyCards.Unknown -= length - color_card_known - locomotives_known;
-    console.log(JSON.stringify(this.enemyCards));
   }
 
   outputCurrentState() {
@@ -2335,7 +2327,7 @@ input = {
           }
       ]
   }
-} ; 0
+};
 
 const visibleCards = {
   Locomotive: 1,
