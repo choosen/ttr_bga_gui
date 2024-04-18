@@ -66,7 +66,7 @@ classes.BasePacket = class {
 classes.ClaimedRoute = class extends classes.BasePacket {
   call(state) {
     const { number: routeLength, colors: colors_a } = this.data().args;
-    const locomotives = colors_a.filter(color => color === COLORS_MAPPING.Locomotive)?.length || 0;
+    const locomotives = colors_a.filter(color => color === COLORS_MAPPING.Locomotive).length || 0;
     const colorNumber = colors_a.find(color => color !== COLORS_MAPPING.Locomotive) || COLORS_MAPPING.Locomotive;
     const color = NUMBER_TO_COLORS_MAPPING[colorNumber];
 
