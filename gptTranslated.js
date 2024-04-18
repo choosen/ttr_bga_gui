@@ -1,8 +1,33 @@
 const MY_NAME = 'chooosen'
 
-class BasePacket {
+const COLORS_MAPPING = {
+  'Locomotive': 0,
+  'Blue': 3,
+  'Black': 6,
+  'Red': 7,
+  'Orange': 5,
+  'Yellow': 4,
+  'Green': 8,
+  'White': 2,
+  'Pink': 1,
+}
+const NUMBER_TO_COLORS_MAPPING ={
+  0: 'Locomotive',
+  3: 'Blue',
+  6: 'Black',
+  7: 'Red',
+  5: 'Orange',
+  4: 'Yellow',
+  8: 'Green',
+  2: 'White',
+  1: 'Pink',
+}
+
+var classes = {};
+
+classes.BasePacket = class {
   constructor(hash) {
-    this.packetData = new PacketData({ ...hash, packet_id: undefined });
+    this.packetData = hash;
   }
 
   packetType() {
@@ -33,7 +58,8 @@ class BasePacket {
   }
 }
 
-class ClaimedRoute extends BasePacket {
+// class ClaimedRoute extends BasePacket {
+classes.ClaimedRoute = class extends classes.BasePacket {
   call(state) {
     const { length: routeLength, colors: colors_a } = this.data().args;
     const locomotives = colors_a.filter(color => color === COLORS_MAPPING.Locomotive).length;
@@ -48,7 +74,8 @@ class ClaimedRoute extends BasePacket {
   }
 }
 
-class TrainCarPicked extends BasePacket {
+// class TrainCarPicked extends BasePacket {
+classes.TrainCarPicked = class extends classes.BasePacket {
   call(state) {
     const { color, count } = this.data().args;
     const colors_a = this.data().args.colors;
@@ -75,13 +102,16 @@ class TrainCarPicked extends BasePacket {
   }
 }
 
-class SimpleNote extends BasePacket {
+// class SimpleNote extends BasePacket {
+classes.SimpleNote = class extends classes.BasePacket {
   call() {
     console.log(this.data().log);
   }
 }
 
-class DestinationsPicked extends BasePacket {
+
+// class DestinationsPicked extends BasePacket {
+classes.DestinationsPicked = class extends classes.BasePacket {
   call() {
     console.log(this.data().log);
   }
@@ -137,11 +167,11 @@ const PacketFactory = {
     switch (true) {
       case hash.data.length > 2:
         throw new Error(`We do not support multiple data in packet ${JSON.stringify(hash)}`);
-      case hash.data.length === 1 && hash.data[0].type:
+      case hash.data.length === 1 && hash.data[0].type != undefined:
         const moveType = hash.data[0].type;
         const ClassName = `${moveType[0].toUpperCase()}${moveType.slice(1)}`;
-        return new Object[ClassName](hash); // window[ClassName] ?
-      case hash.data.length === 1 && !hash.data[0].type:
+        return new classes[ClassName](hash); // window[ClassName] ?
+      case hash.data.length === 1 && hash.data[0].type === undefined:
         throw new Error(`Missing move type ${JSON.stringify(hash)}`);
       case hash.data.length === 0:
         throw new Error(`Missing move object data ${JSON.stringify(hash)}`);
