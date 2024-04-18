@@ -55,4 +55,4 @@ state.output_current_state
 state.check_valid
 puts state.export_to_excel
 puts "enemy is #{ready_packets.detect { |packet| !packet.me?}.player}"
-puts "Game/Table id is #{ready_packets.first.table_id}"
+puts "Game/Table id is #{ready_packets[0].table_id}"

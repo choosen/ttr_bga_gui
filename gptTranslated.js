@@ -51,7 +51,7 @@ classes.BasePacket = class {
   }
 
   table_id() {
-    return this.packet_data.table_id
+    return this.packetData.table_id
   }
 
   data() {
@@ -2382,3 +2382,5 @@ readyPackets.forEach(packet => packet.call(state));
 // state.outputCurrentState();
 state.checkValid()
 console.log(state.export_to_excel())
+console.log(`enemy is ${readyPackets.find(packet => !packet.me()).player()}`);
+console.log(`Game/Table id is ${readyPackets[0].table_id()}`);
