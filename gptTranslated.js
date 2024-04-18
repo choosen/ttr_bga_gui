@@ -195,7 +195,7 @@ const PacketFactory = {
   }
 };
 
-h = {
+input = {
   "status": 1,
   "data": {
       "valid": 1,
@@ -2348,7 +2348,7 @@ const startSetup = {
   Red: 2
 };
 
-const packets = h.data.data.map(entry => PacketFactory.create(entry));
+const packets = input.data.data.map(entry => PacketFactory.create(entry));
 const actionablePackets = packets.filter(packet => [classes.ClaimedRoute, classes.TrainCarPicked].includes(packet.constructor));
 const globalPackets = actionablePackets.filter(packet => packet.global());
 const myPackets = actionablePackets.filter(packet => !packet.global());
