@@ -2004,6 +2004,141 @@ h = {
                       "h": "2d593e"
                   }
               ]
+          },
+          {
+              "channel": "/table/t500450283",
+              "table_id": "500450283",
+              "packet_id": "98",
+              "packet_type": "history",
+              "move_id": "60",
+              "time": "1713414067",
+              "data": [
+                  {
+                      "uid": "66209fb30ad0e",
+                      "type": "claimedRoute",
+                      "log": "${player_name} gains ${points} point(s) by claiming route from ${from} to ${to} with ${number} train car(s) : ${colors}",
+                      "args": {
+                          "player_name": "Claudia81",
+                          "points": 2,
+                          "route": {
+                              "id": 1,
+                              "from": 1,
+                              "to": 4,
+                              "number": 2,
+                              "color": 0,
+                              "tunnel": false,
+                              "locomotives": 0,
+                              "spaces": [
+                                  {
+                                      "x": 1450,
+                                      "y": 747,
+                                      "angle": 3,
+                                      "top": false
+                                  },
+                                  {
+                                      "x": 1516,
+                                      "y": 749,
+                                      "angle": 3,
+                                      "top": false
+                                  }
+                              ]
+                          },
+                          "from": "Atlanta",
+                          "to": "Charleston",
+                          "number": 2,
+                          "colors": [
+                              5,
+                              5
+                          ]
+                      }
+                  }
+              ]
+          },
+          {
+              "channel": "/player/p95232426",
+              "table_id": "500450283",
+              "packet_id": "99",
+              "packet_type": "history",
+              "move_id": "61",
+              "time": "1713425316",
+              "data": [
+                  {
+                      "uid": "6620cba4c46ef",
+                      "type": "trainCarPicked",
+                      "log": "You take hidden train car card(s) ${colors}",
+                      "args": {
+                          "colors": [
+                              0
+                          ]
+                      },
+                      "synchro": 1,
+                      "lock_uuid": "fa7ae43f-b604-4676-8b76-90d20116bc0d",
+                      "h": "b5c82a"
+                  }
+              ]
+          },
+          {
+              "channel": "/table/t500450283",
+              "table_id": "500450283",
+              "packet_id": "100",
+              "packet_type": "history",
+              "move_id": "61",
+              "time": "1713425316",
+              "data": [
+                  {
+                      "uid": "6620cba4c4550",
+                      "type": "trainCarPicked",
+                      "log": "${player_name} takes ${count} hidden train car card(s)",
+                      "args": {
+                          "player_name": "chooosen",
+                          "count": 1
+                      },
+                      "h": "b5c82a"
+                  }
+              ]
+          },
+          {
+              "channel": "/player/p95232426",
+              "table_id": "500450283",
+              "packet_id": "101",
+              "packet_type": "history",
+              "move_id": "62",
+              "time": "1713425321",
+              "data": [
+                  {
+                      "uid": "6620cba93adbc",
+                      "type": "trainCarPicked",
+                      "log": "You take hidden train car card(s) ${colors}",
+                      "args": {
+                          "colors": [
+                              0
+                          ]
+                      },
+                      "synchro": 1,
+                      "lock_uuid": "b767ff9c-f48d-44a5-8f93-b2ffcc457434",
+                      "h": "b50b8c"
+                  }
+              ]
+          },
+          {
+              "channel": "/table/t500450283",
+              "table_id": "500450283",
+              "packet_id": "102",
+              "packet_type": "history",
+              "move_id": "62",
+              "time": "1713425321",
+              "data": [
+                  {
+                      "uid": "6620cba93ab0e",
+                      "type": "trainCarPicked",
+                      "log": "${player_name} takes ${count} hidden train car card(s)",
+                      "args": {
+                          "player_name": "chooosen",
+                          "count": 1
+                      },
+                      "h": "b50b8c"
+                  }
+              ]
           }
       ]
   }
@@ -2061,7 +2196,7 @@ Orange: 2,
 # Pink: 0
 }
 start_setup = { Locomotive: 1, Orange: 1, Red: 2 }
-state = State.new(visible_cards, start_setup, my_left_trains: 27, enemy_left_trains: 29)
+state = State.new(visible_cards, start_setup, my_left_trains: 27, enemy_left_trains: 27)
 
 ready_packets.each { |packet| packet.call state }
 
