@@ -91,6 +91,7 @@ classes.TrainCarPicked = class extends classes.BasePacket {
       }
     } else {
       if (color !== undefined) {
+        console.log(NUMBER_TO_COLORS_MAPPING[color], this.data().args);
         return state.enemyTakeCard(NUMBER_TO_COLORS_MAPPING[color]);
       } else {
         if (count === 2) {
@@ -121,9 +122,9 @@ class State {
   constructor(visibleCards, startSetup, { myLeftTrains, enemyLeftTrains }) {
     this.visibleCards = visibleCards;
     this.myCards = Object.fromEntries(Object.keys(COLORS_MAPPING).map(color => [color, 0]));
-    this.myUsedCards = { ...this.myCards };
-    this.enemyUsedCards = { ...this.myCards };
-    this.enemyCards = { ...this.myCards, 'Unknown': 0 };
+    this.myUsedCards = Object.fromEntries(Object.keys(COLORS_MAPPING).map(color => [color, 0]));
+    this.enemyUsedCards = Object.fromEntries(Object.keys(COLORS_MAPPING).map(color => [color, 0]));
+    this.enemyCards = { ...Object.fromEntries(Object.keys(COLORS_MAPPING).map(color => [color, 0])), 'Unknown': 4 };
     Object.entries(startSetup).forEach(([color, number]) => this.myCards[color] = number);
     this.enemyLeftTrains = enemyLeftTrains;
     this.myLeftTrains = myLeftTrains;
@@ -131,11 +132,12 @@ class State {
 
   enemyTakeCard(color = 'Unknown') {
     this.enemyCards[color]++;
+    console.log(this.enemyCards);
   }
 
   myTakeCard(color) {
     this.myCards[color]++;
-    console.log(this.myCards);
+    // console.log(this.myCards);
   }
 
   myCardUse({ color, length, locomotives = 0 }) {
@@ -143,14 +145,24 @@ class State {
     this.myUsedCards[color] += colorLength;
     this.myCards[color] -= colorLength;
     this.myUsedCards.Locomotive += locomotives;
+    this.myCards.Locomotive -= locomotives;
   }
 
   enemyCardUse({ color, length, locomotives = 0 }) {
     const colorLength = length - locomotives;
     this.enemyUsedCards[color] += colorLength;
-    this.enemyCards.Unknown -= colorLength - this.enemyCards[color];
-    this.enemyCards[color] = Math.max(this.enemyCards[color] - colorLength, 0);
     this.enemyUsedCards.Locomotive += locomotives;
+
+    const color_card_known = Math.min(this.enemyCards[color], colorLength);
+    const locomotives_known = Math.min(this.enemyCards.Locomotive, locomotives);
+
+    console.log(JSON.stringify(this.enemyCards));
+    this.enemyCards[color] -= color_card_known;
+    console.log(JSON.stringify(this.enemyCards));
+    this.enemyCards.Locomotive -= locomotives_known;
+    console.log(JSON.stringify(this.enemyCards));
+    this.enemyCards.Unknown -= length - color_card_known - locomotives_known;
+    console.log(JSON.stringify(this.enemyCards));
   }
 
   outputCurrentState() {
@@ -2348,6 +2360,7 @@ myPackets.forEach(packet => {
 const readyPackets = globalPackets;
 
 const state = new State(visibleCards, startSetup, { myLeftTrains: 27, enemyLeftTrains: 27 });
+console.log(JSON.stringify(state));
 
 readyPackets.forEach(packet => packet.call(state));
 state.outputCurrentState();
