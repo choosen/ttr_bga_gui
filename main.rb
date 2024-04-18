@@ -6,6 +6,12 @@ require 'active_support'
 require "active_support/core_ext/array"
 require "active_support/core_ext/hash"
 
+# https://boardgamearena.com/10/tickettoride/tickettoride/notificationHistory.html?table=500450283&from=108&privateinc=1&history=1&noerrortracking=true&dojo.preventCache=1713452046818
+# url to search for, tab Preview, click right mouse button on top object and select: copy object.
+# paste it to historyData.json
+# adjust state: visible_cards, left_trains, start_setup
+# and run script
+
 DECK_CARDS_NO = 110
 
 input = JSON.load_file('historyData.json').deep_symbolize_keys!
@@ -45,6 +51,7 @@ state = State.new(visible_cards, start_setup, my_left_trains: 27, enemy_left_tra
 
 ready_packets.each { |packet| packet.call state }
 
+state.output_current_state
 state.check_valid
 puts state.export_to_excel
 puts "enemy is #{ready_packets.detect { |packet| !packet.me?}.player}"
