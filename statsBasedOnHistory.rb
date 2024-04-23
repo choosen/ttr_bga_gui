@@ -49,8 +49,8 @@ class BasePacket
   attr_reader :packet_data
 
   def data
-    raise "we do not handle multiple data in packet: #{packet_data}" if packet_data.data.length > 1
-
+    # raise "we do not handle multiple data in packet: #{packet_data}" if packet_data.data.length > 1
+    # except highlightVisibleLocomotives. So we skip check here
     packet_data.data[0]
   end
 end
