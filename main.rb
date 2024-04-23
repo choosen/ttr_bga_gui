@@ -37,14 +37,14 @@ ready_packets = global_packets
 # p ready_packets
 
 visible_cards = { Locomotive: 2,
-Blue: 1,
+# Blue: 2,
 # Black: 0,
-Red: 1,
+Red: 2,
 # Orange: 0,
 # Yellow: 0,
 # Green: 0,
-White: 1,
-# Pink: 0
+# White: 1,
+Pink: 1
 }
 start_setup = { Blue: 1, Red: 1 , White: 1, Black: 1 }
 state = State.new(visible_cards, start_setup, my_left_trains: 43, enemy_left_trains: 35)
@@ -56,3 +56,6 @@ state.check_valid
 puts state.export_to_excel
 puts "enemy is #{ready_packets.detect { |packet| !packet.me?}.player}"
 puts "Game/Table id is #{ready_packets[0].table_id}"
+puts
+puts 'Enemy moves:'
+puts state.export_enemy_moves_excel

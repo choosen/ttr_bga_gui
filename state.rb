@@ -69,21 +69,29 @@ class State
     puts "Verify: Enemy Cards used: #{enemy_used_cards.values.sum}"
     valid_card_trains_and_used_cards =
       45 * 2 - (my_left_trains + enemy_left_trains) == my_used_cards.values.sum + enemy_used_cards.values.sum
-    puts 'All Valid, based on number of trains and log' if valid_card_trains_and_used_cards
+    if valid_card_trains_and_used_cards
+      puts 'All Valid, based on number of trains and log'
+    else
+      puts 'ERROR, based on number of trains and log'
+    end
   end
 
   def export_to_excel
-    output = []
-    COLORS_MAPPING.each do |color, _|
+    COLORS_MAPPING.each_key.map do |color|
       row = [
         my_used_cards[color] + enemy_used_cards[color],
         my_cards[color],
         enemy_cards[color],
         visible_cards[color] || '',
       ]
-      output << row.join("\t")
-    end
-    output.join "\n"
+      row.join("\t")
+    end.join "\n"
+  end
+
+  def export_enemy_moves_excel
+    COLORS_MAPPING.each_key.map do |color|
+      enemy_used_cards[color]
+    end.join "\n"
   end
 
   private
