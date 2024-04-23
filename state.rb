@@ -90,5 +90,5 @@ class State
 
   attr_reader :enemy_cards, :enemy_used_cards,  :enemy_left_trains,
               :my_left_trains, :my_cards, :my_used_cards,
-              :start_setup
+              :start_setup, :visible_cards
 end
