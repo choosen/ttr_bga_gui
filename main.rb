@@ -51,11 +51,12 @@ state = State.new(visible_cards, start_setup, my_left_trains: 43, enemy_left_tra
 
 ready_packets.each { |packet| packet.call state }
 
-state.output_current_state
-state.check_valid
-puts state.export_to_excel
-puts "enemy is #{ready_packets.detect { |packet| !packet.me?}.player}"
-puts "Game/Table id is #{ready_packets[0].table_id}"
-puts
-puts 'Enemy moves:'
-puts state.export_enemy_moves_excel
+if state.valid?
+  state.output_current_state
+  puts state.export_to_excel
+  puts "enemy is #{ready_packets.detect { |packet| !packet.me?}.player}"
+  puts "Game/Table id is #{ready_packets[0].table_id}"
+  puts
+  puts 'Enemy moves:'
+  puts state.export_enemy_moves_excel
+end

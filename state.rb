@@ -64,15 +64,17 @@ class State
     puts "Verify: Enemy Cards in hand: #{enemy_cards.values.sum}"
   end
 
-  def check_valid
+  def valid?
     puts "Verify: My Cards used: #{my_used_cards.values.sum}"
     puts "Verify: Enemy Cards used: #{enemy_used_cards.values.sum}"
     valid_card_trains_and_used_cards =
       45 * 2 - (my_left_trains + enemy_left_trains) == my_used_cards.values.sum + enemy_used_cards.values.sum
     if valid_card_trains_and_used_cards
       puts 'All Valid, based on number of trains and log'
+      true
     else
       puts 'ERROR, based on number of trains and log'
+      false
     end
   end
 
