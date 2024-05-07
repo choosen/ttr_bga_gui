@@ -7,6 +7,7 @@ require_relative 'state'
 #     [1] "destinationsPicked",     //////// not useful to spreadsheet
 #     [2] "claimedRoute",
 #     [3] "trainCarPicked"
+#  and highlightVisibleLocomotives as second move type
 
 # Type of message: global/per player = private
 # [:channel].include? 'table'  ? :global : :private
