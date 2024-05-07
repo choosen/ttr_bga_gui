@@ -59,8 +59,8 @@ if state.valid?
   state.output_current_state
   puts state.export_to_excel
   puts "enemy is #{ready_packets.detect { |packet| !packet.me?}.player}"
-  # TODO: game started by:
   puts "Game/Table id is #{ready_packets[0].table_id}"
+  puts "Game started by #{ready_packets.first.player}"
   puts
   state.export_enemy_moves_excel
 end
