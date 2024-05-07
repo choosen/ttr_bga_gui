@@ -81,19 +81,28 @@ class State
   def export_to_excel
     COLORS_MAPPING.each_key.map do |color|
       row = [
-        my_used_cards[color] + enemy_used_cards[color],
-        my_cards[color],
-        enemy_cards[color],
-        visible_cards[color] || '',
+        (my_used_cards[color] + enemy_used_cards[color]).then(&method(:replace_zero_with_empty_string)),
+        my_cards[color].then(&method(:replace_zero_with_empty_string)),
+        enemy_cards[color].then(&method(:replace_zero_with_empty_string)),
+        visible_cards[color].then(&method(:replace_zero_with_empty_string)) || '',
       ]
       row.join("\t")
     end.join "\n"
   end
 
+  def replace_zero_with_empty_string(value)
+    value == 0 ? '' : value
+  end
+
   def export_enemy_moves_excel
-    COLORS_MAPPING.each_key.map do |color|
-      enemy_used_cards[color]
-    end.join "\n"
+    enemy_moves = COLORS_MAPPING.each_key.map do |color|
+      enemy_used_cards[color].then(&method(:replace_zero_with_empty_string))
+    end
+    return puts '> No visible cards from user <' if enemy_moves.all? { |value| value == '' }
+
+    puts 'Enemy moves:'
+    puts enemy_moves.join "\n"
+    # todo: My card visible to enemy
   end
 
   private
