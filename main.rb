@@ -38,19 +38,19 @@ ready_packets = global_packets
 
 visible_cards = {
   # Locomotive: 1,
-  Blue: 2,
-  Black: 1,
-  Red: 1,
+  Blue: 1,
+  # Black: 1,
+  # Red: 1,
   # Orange: 1,
-  # Yellow: 0,
-  # Green: 2,
+  Yellow: 2,
+  Green: 1,
   # White: 2,
-  Pink: 1
+  # Pink: 1
 }
 
-start_setup = { Red: 1, White: 2, Black: 1 }
-my_left_trains = 13
-enemy_left_trains = 15
+start_setup = { Yellow: 2, Blue: 1, Green: 1 }
+my_left_trains = 45
+enemy_left_trains = 45
 state = State.new(visible_cards, start_setup, my_left_trains:, enemy_left_trains:)
 
 ready_packets.each { |packet| packet.call state }
