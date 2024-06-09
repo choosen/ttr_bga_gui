@@ -101,3 +101,9 @@ class DestinationsPicked < BasePacket
     puts data[:log]
   end
 end
+
+class DestinationCompleted < BasePacket
+  def call(state)
+    puts data[:log]
+  end
+end
