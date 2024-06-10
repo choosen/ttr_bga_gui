@@ -1,17 +1,8 @@
-COLORS_MAPPING = {
-    Locomotive: 0,
-    Blue: 3,
-    Black: 6,
-    Red: 7,
-    Orange: 5,
-    Yellow: 4,
-    Green: 8,
-    White: 2,
-    Pink: 1,
-}.freeze
-NUMBER_TO_COLORS_MAPPING = COLORS_MAPPING.invert
+require_relative 'stateInitializer'
 
 class State
+  extend StateInitializer
+
   def initialize(visible_cards, start_setup, my_left_trains: , enemy_left_trains:)
     @visible_cards = visible_cards
     @my_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h

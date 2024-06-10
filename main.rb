@@ -1,4 +1,4 @@
-require_relative 'statsBasedOnHistory'
+require_relative 'packets'
 require_relative 'state'
 require_relative 'PacketFactory'
 require 'json'
@@ -36,22 +36,8 @@ end
 ready_packets = global_packets
 # p ready_packets
 
-visible_cards = {
-  # Locomotive: 2,
-  # Blue: 1,
-  Black: 1,
-  Red: 2,
-  # Orange: 1,
-  Yellow: 1,
-  # Green: 2,
-  # White: 1,
-  Pink: 1
-}
-
-start_setup = { Yellow: 1, Orange: 1, Green: 1, Locomotive: 1 }
-my_left_trains = 3
-enemy_left_trains = 8
-state = State.new(visible_cards, start_setup, my_left_trains:, enemy_left_trains:)
+# state = State.build # setup by hand in stateInitializer.rb:18
+state = State.parse_js # setup by hand in stateInitializer.rb:39
 
 ready_packets.each { |packet| packet.call state }
 
