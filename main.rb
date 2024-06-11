@@ -41,8 +41,8 @@ state = State.parse_js # setup by hand in stateInitializer.rb:39
 
 ready_packets.each { |packet| packet.call state }
 
+state.output_current_state
 if state.valid?
-  state.output_current_state
   puts state.export_to_excel
   puts "enemy is #{packets.detect { |packet| !packet.me?}.player}"
   puts "Game/Table id is #{packets[0].table_id}"

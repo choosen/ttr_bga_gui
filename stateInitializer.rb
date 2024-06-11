@@ -1,15 +1,15 @@
 require 'json'
 
 COLORS_MAPPING = {
-    Locomotive: 0,
-    Blue: 3,
-    Black: 6,
-    Red: 7,
-    Orange: 5,
-    Yellow: 4,
-    Green: 8,
-    White: 2,
-    Pink: 1,
+  Locomotive: 0,
+  Pink: 1,
+  White: 2,
+  Blue: 3,
+  Yellow: 4,
+  Orange: 5,
+  Black: 6,
+  Red: 7,
+  Green: 8,
 }.freeze
 NUMBER_TO_COLORS_MAPPING = COLORS_MAPPING.invert
 
@@ -37,34 +37,40 @@ module StateInitializer
   def parse_js
     js_content = <<~JSON
     {
-      "visible_cards": {
-          "2": 2,
-          "3": 1,
-          "4": 1,
-          "7": 1
-      },
-      "start_setup": {
-          "0": 1,
-          "3": 2,
-          "5": 1
-      },
-      "player_stats": [
-          {
-              "id": "94349540",
-              "remainingTrainCarsCount": 45,
-              "name": "Jeroenpenguina",
-              "trainCarsCount": 4,
-              "claimedRoutes": []
-          },
-          {
-              "id": "95232426",
-              "remainingTrainCarsCount": 45,
-              "name": "chooosen",
-              "trainCarsCount": 4,
-              "claimedRoutes": []
-          }
-      ]
-    }
+    "visible_cards": {
+        "2": 2,
+        "3": 1,
+        "4": 1,
+        "7": 1
+    },
+    "start_setup": {
+        "0": 6,
+        "1": 4,
+        "2": 3,
+        "3": 6,
+        "4": 1,
+        "5": 6,
+        "6": 2,
+        "7": 2,
+        "8": 4
+    },
+    "player_stats": [
+        {
+            "id": "94349540",
+            "remainingTrainCarsCount": 45,
+            "name": "Jeroenpenguina",
+            "trainCarsCount": 34,
+            "claimedRoutes": []
+        },
+        {
+            "id": "95232426",
+            "remainingTrainCarsCount": 45,
+            "name": "chooosen",
+            "trainCarsCount": 34,
+            "claimedRoutes": []
+        }
+    ]
+}
     JSON
     JSON.parse(js_content).deep_symbolize_keys => { visible_cards:, start_setup:, player_stats: }
 
