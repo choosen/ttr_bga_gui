@@ -36,15 +36,35 @@ module StateInitializer
 
   def parse_js
     js_content = <<~JSON
-      {"visible_cards":{
-        "6":1,"7":2,"4":1,"1":1
-        },"start_setup":{
-          "4":1,"5":1,"8":1,"0":1
-        },"player_stats":[
-          {"name":"Kaya31","claimedRoutes":["Atlanta","Miami"],"remainingTrainCarsCount":8,"trainCarsCount":13},
-          {"name":"chooosen","claimedRoutes":[],"remainingTrainCarsCount":3,"trainCarsCount":2}
-        ]
-      }
+    {
+      "visible_cards": {
+          "2": 2,
+          "3": 1,
+          "4": 1,
+          "7": 1
+      },
+      "start_setup": {
+          "0": 1,
+          "3": 2,
+          "5": 1
+      },
+      "player_stats": [
+          {
+              "id": "94349540",
+              "remainingTrainCarsCount": 45,
+              "name": "Jeroenpenguina",
+              "trainCarsCount": 4,
+              "claimedRoutes": []
+          },
+          {
+              "id": "95232426",
+              "remainingTrainCarsCount": 45,
+              "name": "chooosen",
+              "trainCarsCount": 4,
+              "claimedRoutes": []
+          }
+      ]
+    }
     JSON
     JSON.parse(js_content).deep_symbolize_keys => { visible_cards:, start_setup:, player_stats: }
 
