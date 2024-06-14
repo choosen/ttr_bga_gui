@@ -27,11 +27,6 @@ module StateInitializer
       # Pink: 1
     }
 
-    # {
-    # "0": 1,
-    # "3": 2,
-    # "5": 1
-    # }
     start_setup = { Blue: 2, Orange: 1, Locomotive: 1 }
     my_left_trains = 36
     enemy_left_trains = 30
