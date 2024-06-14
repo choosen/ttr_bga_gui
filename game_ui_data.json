@@ -1,0 +1,36 @@
+{
+  "visible_cards": {
+      "0": 2,
+      "5": 1,
+      "6": 2
+  },
+  "start_setup": {
+    "0":3,"1":5,"2":5,"3":6,"4":0,"5":7,"6":1,"7":4,"8":4
+  },
+  "player_stats": [
+      {
+          "id": "94349540",
+          "remainingTrainCarsCount": 30,
+          "name": "Jeroenpenguina",
+          "trainCarsCount": 29,
+          "claimedRoutes": [
+              "Omaha",
+              "Denver",
+              "Phoenix",
+              "El Paso",
+              "Houston"
+          ]
+      },
+      {
+          "id": "95232426",
+          "remainingTrainCarsCount": 36,
+          "name": "chooosen",
+          "trainCarsCount": 35,
+          "claimedRoutes": [
+              "El Paso",
+              "Los Angeles",
+              "San Francisco"
+          ]
+      }
+  ]
+}

@@ -9,7 +9,6 @@ class State
     @start_setup = start_setup
     @start_setup.each { |color, number| my_cards[color] = number }
     @my_used_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
-
     @enemy_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
     @enemy_cards[:Unknown] = 4
     @enemy_used_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
@@ -50,16 +49,16 @@ class State
   end
 
   def output_current_state
-    p self
-    puts "Verify: My Cards in hand: #{my_cards.values.sum}"
+    pp self
+    puts "Verify: My Cards in hand (#{my_cards_with_js_load_fix.values.sum}): #{my_cards_with_js_load_fix}"
     puts "Verify: Enemy Cards in hand: #{enemy_cards.values.sum}"
   end
 
   def valid?
-    puts "Verify: My Cards used: #{my_used_cards.values.sum}"
+    puts "Verify: My Cards used: #{my_used_cards_number}"
     puts "Verify: Enemy Cards used: #{enemy_used_cards.values.sum}"
     valid_card_trains_and_used_cards =
-      45 * 2 - (my_left_trains + enemy_left_trains) == my_used_cards.values.sum + enemy_used_cards.values.sum
+      45 * 2 - (my_left_trains + enemy_left_trains) == my_used_cards_number + enemy_used_cards.values.sum
     if valid_card_trains_and_used_cards
       puts 'All Valid, based on number of trains and log'
       true
@@ -73,16 +72,12 @@ class State
     COLORS_MAPPING.each_key.map do |color|
       row = [
         (my_used_cards[color] + enemy_used_cards[color]).then(&method(:replace_zero_with_empty_string)),
-        my_cards[color].then(&method(:replace_zero_with_empty_string)),
+        my_cards_with_js_load_fix[color].then(&method(:replace_zero_with_empty_string)),
         enemy_cards[color].then(&method(:replace_zero_with_empty_string)),
         visible_cards[color].then(&method(:replace_zero_with_empty_string)) || '',
       ]
       row.join("\t")
     end.join "\n"
-  end
-
-  def replace_zero_with_empty_string(value)
-    value == 0 ? '' : value
   end
 
   def export_enemy_moves_excel
@@ -101,4 +96,24 @@ class State
   attr_reader :enemy_cards, :enemy_used_cards,  :enemy_left_trains,
               :my_left_trains, :my_cards, :my_used_cards,
               :start_setup, :visible_cards
+
+  def my_used_cards_number
+    my_used_cards.values.sum
+  end
+
+  def my_cards_with_js_load_fix
+    if start_setup.values.sum == 4
+      my_cards
+    else
+      start_setup # start setup is current state also
+    end
+  end
+      # initial_cards_number = start_setup.values.sum + my_used_cards.values.sum # valid only if state was collected with notification history
+      # stan_obecny = stan poczatkowy + dodane_karty - uzyte karty
+      # stan poczatkowy = stan_obecny - dodane_karty + uzyte karty
+      # tylko nadal nie wiemy czy stan obecny jest z JS zawsze, wykrywanie tego moze byc trudne
+
+  def replace_zero_with_empty_string(value)
+    value == 0 ? '' : value
+  end
 end

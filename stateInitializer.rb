@@ -1,75 +1,50 @@
 require 'json'
 
 COLORS_MAPPING = {
-    Locomotive: 0,
-    Blue: 3,
-    Black: 6,
-    Red: 7,
-    Orange: 5,
-    Yellow: 4,
-    Green: 8,
-    White: 2,
-    Pink: 1,
+  Locomotive: 0,
+  Pink: 1,
+  White: 2,
+  Blue: 3,
+  Yellow: 4,
+  Orange: 5,
+  Black: 6,
+  Red: 7,
+  Green: 8,
 }.freeze
 NUMBER_TO_COLORS_MAPPING = COLORS_MAPPING.invert
 
 module StateInitializer
   def build
     visible_cards = {
-      # Locomotive: 2,
+      Locomotive: 2,
       # Blue: 1,
-      Black: 1,
-      Red: 2,
-      # Orange: 1,
-      Yellow: 1,
+      Black: 2,
+      # Red: 1,
+      Orange: 1,
+      # Yellow: 1,
       # Green: 2,
-      # White: 1,
-      Pink: 1
+      # White: 2,
+      # Pink: 1
     }
 
-    start_setup = { Yellow: 1, Orange: 1, Green: 1, Locomotive: 1 }
-    my_left_trains = 3
-    enemy_left_trains = 8
+    # {
+    # "0": 1,
+    # "3": 2,
+    # "5": 1
+    # }
+    start_setup = { Blue: 2, Orange: 1, Locomotive: 1 }
+    my_left_trains = 36
+    enemy_left_trains = 30
 
     new(visible_cards, start_setup, my_left_trains:, enemy_left_trains:)
   end
 
   def parse_js
-    js_content = <<~JSON
-    {
-      "visible_cards": {
-          "2": 2,
-          "3": 1,
-          "4": 1,
-          "7": 1
-      },
-      "start_setup": {
-          "0": 1,
-          "3": 2,
-          "5": 1
-      },
-      "player_stats": [
-          {
-              "id": "94349540",
-              "remainingTrainCarsCount": 45,
-              "name": "Jeroenpenguina",
-              "trainCarsCount": 4,
-              "claimedRoutes": []
-          },
-          {
-              "id": "95232426",
-              "remainingTrainCarsCount": 45,
-              "name": "chooosen",
-              "trainCarsCount": 4,
-              "claimedRoutes": []
-          }
-      ]
-    }
-    JSON
-    JSON.parse(js_content).deep_symbolize_keys => { visible_cards:, start_setup:, player_stats: }
+    JSON.load_file('game_ui_data.json').deep_symbolize_keys =>
+      { visible_cards:, start_setup:, player_stats: }
 
     my_stats, other_stats = player_stats.partition { |stat| stat[:name] == MY_NAME }
-    p player_stats
+    ap player_stats
     my_left_trains = my_stats[0].fetch(:remainingTrainCarsCount)
     enemy_left_trains = other_stats[0].fetch(:remainingTrainCarsCount)
     puts 'Enemy owned destinations:'
@@ -77,6 +52,7 @@ module StateInitializer
     puts
     visible_cards.transform_keys! { |key| NUMBER_TO_COLORS_MAPPING.fetch(key.to_s.to_i) }
     start_setup.transform_keys! { |key| NUMBER_TO_COLORS_MAPPING.fetch(key.to_s.to_i) }
+    ap({my_left_trains:, enemy_left_trains:, visible_cards:})
     new(visible_cards, start_setup, my_left_trains:, enemy_left_trains:)
   end
 end
