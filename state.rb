@@ -71,6 +71,15 @@ class State
     end
   end
 
+  # algorithm: based on enemy moves find out where the JSON UI state is and skip validation there,
+  # just continue with history
+
+  # IDEA: check where we are with history.log and if it is not synced to the end with JS state then:
+  # mark current state as setup_state for me
+  # do validate my cards with UI state (sometimes 1 move has to be ahead, if exported the state after my move)
+  # update progress on based on remaining history to me
+  # notify that it was based on outdated data, so please confirm calculated state!
+
   def valid_enemy_cards_number?
     unless enemy_left_cards
       puts 'Skipping validate as no state from JS'
