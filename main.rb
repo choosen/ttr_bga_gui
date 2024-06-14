@@ -40,8 +40,8 @@ end
 ready_packets = global_packets
 # p ready_packets
 
-state = State.build # setup by hand in stateInitializer.rb:18
-# state = State.parse_js # setup by hand in stateInitializer.rb:39
+# state = State.build # setup by hand in stateInitializer.rb:18
+state = State.parse_js # setup by hand in stateInitializer.rb:39
 
 ready_packets.each { |packet| packet.call state }
 

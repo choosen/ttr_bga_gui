@@ -5,42 +5,31 @@
       "6": 2
   },
   "start_setup": {
-      "0": 3,
-      "1": 5,
-      "2": 5,
-      "5": 7,
-      "7": 4
+    "0":3,"1":5,"2":5,"3":6,"4":0,"5":7,"6":1,"7":4,"8":4
   },
   "player_stats": [
       {
           "id": "94349540",
-          "remainingTrainCarsCount": 15,
+          "remainingTrainCarsCount": 30,
           "name": "Jeroenpenguina",
-          "trainCarsCount": 14,
+          "trainCarsCount": 29,
           "claimedRoutes": [
-              "Chicago",
               "Omaha",
               "Denver",
               "Phoenix",
               "El Paso",
-              "Houston",
-              "Helena",
-              "Seattle"
+              "Houston"
           ]
       },
       {
           "id": "95232426",
-          "remainingTrainCarsCount": 25,
+          "remainingTrainCarsCount": 36,
           "name": "chooosen",
-          "trainCarsCount": 24,
+          "trainCarsCount": 35,
           "claimedRoutes": [
-              "Calgary",
-              "Seattle",
               "El Paso",
               "Los Angeles",
-              "San Francisco",
-              "Portland",
-              "Salt Lake City"
+              "San Francisco"
           ]
       }
   ]
