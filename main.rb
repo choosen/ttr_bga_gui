@@ -6,6 +6,9 @@ require 'active_support'
 require "active_support/core_ext/array"
 require "active_support/core_ext/hash"
 
+require 'date'
+require 'amazing_print'
+
 # https://boardgamearena.com/10/tickettoride/tickettoride/notificationHistory.html?table=500450283&from=108&privateinc=1&history=1&noerrortracking=true&dojo.preventCache=1713452046818
 # url to search for, tab Preview, click right mouse button on top object and select: copy object.
 # paste it to historyData.json

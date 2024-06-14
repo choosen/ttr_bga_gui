@@ -95,6 +95,7 @@ module StateInitializer
     puts
     visible_cards.transform_keys! { |key| NUMBER_TO_COLORS_MAPPING.fetch(key.to_s.to_i) }
     start_setup.transform_keys! { |key| NUMBER_TO_COLORS_MAPPING.fetch(key.to_s.to_i) }
+    ap({my_left_trains:, enemy_left_trains:, visible_cards:})
     new(visible_cards, start_setup, my_left_trains:, enemy_left_trains:)
   end
 end
