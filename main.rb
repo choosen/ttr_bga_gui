@@ -8,6 +8,7 @@ require "active_support/core_ext/hash"
 
 require 'date'
 require 'amazing_print'
+require 'debug'
 
 # https://boardgamearena.com/10/tickettoride/tickettoride/notificationHistory.html?table=500450283&from=108&privateinc=1&history=1&noerrortracking=true&dojo.preventCache=1713452046818
 # url to search for, tab Preview, click right mouse button on top object and select: copy object.
@@ -39,8 +40,8 @@ end
 ready_packets = global_packets
 # p ready_packets
 
-# state = State.build # setup by hand in stateInitializer.rb:18
-state = State.parse_js # setup by hand in stateInitializer.rb:39
+state = State.build # setup by hand in stateInitializer.rb:18
+# state = State.parse_js # setup by hand in stateInitializer.rb:39
 
 ready_packets.each { |packet| packet.call state }
 

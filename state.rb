@@ -49,7 +49,7 @@ class State
   end
 
   def output_current_state
-    p self
+    pp self
     puts "Verify: My Cards in hand (#{my_cards_with_js_load_fix.values.sum}): #{my_cards_with_js_load_fix}"
     puts "Verify: Enemy Cards in hand: #{enemy_cards.values.sum}"
   end

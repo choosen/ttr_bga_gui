@@ -16,20 +16,25 @@ NUMBER_TO_COLORS_MAPPING = COLORS_MAPPING.invert
 module StateInitializer
   def build
     visible_cards = {
-      # Locomotive: 2,
+      Locomotive: 2,
       # Blue: 1,
-      Black: 1,
-      Red: 2,
-      # Orange: 1,
-      Yellow: 1,
+      Black: 2,
+      # Red: 1,
+      Orange: 1,
+      # Yellow: 1,
       # Green: 2,
-      # White: 1,
-      Pink: 1
+      # White: 2,
+      # Pink: 1
     }
 
-    start_setup = { Yellow: 1, Orange: 1, Green: 1, Locomotive: 1 }
-    my_left_trains = 3
-    enemy_left_trains = 8
+    # {
+    # "0": 1,
+    # "3": 2,
+    # "5": 1
+    # }
+    start_setup = { Blue: 2, Orange: 1, Locomotive: 1 }
+    my_left_trains = 36
+    enemy_left_trains = 30
 
     new(visible_cards, start_setup, my_left_trains:, enemy_left_trains:)
   end
@@ -39,7 +44,7 @@ module StateInitializer
       { visible_cards:, start_setup:, player_stats: }
 
     my_stats, other_stats = player_stats.partition { |stat| stat[:name] == MY_NAME }
-    p player_stats
+    ap player_stats
     my_left_trains = my_stats[0].fetch(:remainingTrainCarsCount)
     enemy_left_trains = other_stats[0].fetch(:remainingTrainCarsCount)
     puts 'Enemy owned destinations:'
