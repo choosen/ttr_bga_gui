@@ -37,40 +37,52 @@ module StateInitializer
   def parse_js
     js_content = <<~JSON
     {
-    "visible_cards": {
-        "2": 2,
-        "3": 1,
-        "4": 1,
-        "7": 1
-    },
-    "start_setup": {
-        "0": 6,
-        "1": 4,
-        "2": 3,
-        "3": 6,
-        "4": 1,
-        "5": 6,
-        "6": 2,
-        "7": 2,
-        "8": 4
-    },
-    "player_stats": [
-        {
-            "id": "94349540",
-            "remainingTrainCarsCount": 45,
-            "name": "Jeroenpenguina",
-            "trainCarsCount": 34,
-            "claimedRoutes": []
-        },
-        {
-            "id": "95232426",
-            "remainingTrainCarsCount": 45,
-            "name": "chooosen",
-            "trainCarsCount": 34,
-            "claimedRoutes": []
-        }
-    ]
-}
+      "visible_cards": {
+          "0": 2,
+          "5": 1,
+          "6": 2
+      },
+      "start_setup": {
+          "0": 3,
+          "1": 5,
+          "2": 5,
+          "5": 7,
+          "7": 4
+      },
+      "player_stats": [
+          {
+              "id": "94349540",
+              "remainingTrainCarsCount": 15,
+              "name": "Jeroenpenguina",
+              "trainCarsCount": 14,
+              "claimedRoutes": [
+                  "Chicago",
+                  "Omaha",
+                  "Denver",
+                  "Phoenix",
+                  "El Paso",
+                  "Houston",
+                  "Helena",
+                  "Seattle"
+              ]
+          },
+          {
+              "id": "95232426",
+              "remainingTrainCarsCount": 25,
+              "name": "chooosen",
+              "trainCarsCount": 24,
+              "claimedRoutes": [
+                  "Calgary",
+                  "Seattle",
+                  "El Paso",
+                  "Los Angeles",
+                  "San Francisco",
+                  "Portland",
+                  "Salt Lake City"
+              ]
+          }
+      ]
+  }
     JSON
     JSON.parse(js_content).deep_symbolize_keys => { visible_cards:, start_setup:, player_stats: }
 
