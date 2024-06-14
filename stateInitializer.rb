@@ -41,13 +41,16 @@ module StateInitializer
     my_stats, other_stats = player_stats.partition { |stat| stat[:name] == MY_NAME }
     ap player_stats
     my_left_trains = my_stats[0].fetch(:remainingTrainCarsCount)
+    my_left_cards = my_stats[0].fetch(:trainCarsCount)
     enemy_left_trains = other_stats[0].fetch(:remainingTrainCarsCount)
+    enemy_left_cards = other_stats[0].fetch(:trainCarsCount)
     puts 'Enemy owned destinations:'
     puts other_stats[0].fetch(:claimedRoutes).join("\n") # consume it, or just print it? :D
     puts
     visible_cards.transform_keys! { |key| NUMBER_TO_COLORS_MAPPING.fetch(key.to_s.to_i) }
     start_setup.transform_keys! { |key| NUMBER_TO_COLORS_MAPPING.fetch(key.to_s.to_i) }
-    ap({my_left_trains:, enemy_left_trains:, visible_cards:})
-    new(visible_cards, start_setup, my_left_trains:, enemy_left_trains:)
+    params = { my_left_trains:, enemy_left_trains:, my_left_cards:, enemy_left_cards: }
+    ap(params.merge({ visible_cards:, start_setup: }))
+    new(visible_cards, start_setup, **params)
   end
 end

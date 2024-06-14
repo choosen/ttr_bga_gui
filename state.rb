@@ -3,7 +3,8 @@ require_relative 'stateInitializer'
 class State
   extend StateInitializer
 
-  def initialize(visible_cards, start_setup, my_left_trains: , enemy_left_trains:)
+  def initialize(visible_cards, start_setup, my_left_trains:, enemy_left_trains:,
+                 my_left_cards: nil, enemy_left_cards: nil)
     @visible_cards = visible_cards
     @my_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
     @start_setup = start_setup
@@ -14,6 +15,8 @@ class State
     @enemy_used_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
     @enemy_left_trains = enemy_left_trains
     @my_left_trains = my_left_trains
+    @my_left_cards = my_left_cards
+    @enemy_left_cards = enemy_left_cards
   end
 
   def enemy_take_card(color: :Unknown)
@@ -59,12 +62,26 @@ class State
     puts "Verify: Enemy Cards used: #{enemy_used_cards.values.sum}"
     valid_card_trains_and_used_cards =
       45 * 2 - (my_left_trains + enemy_left_trains) == my_used_cards_number + enemy_used_cards.values.sum
-    if valid_card_trains_and_used_cards
+    if valid_enemy_cards_number? && valid_card_trains_and_used_cards
       puts 'All Valid, based on number of trains and log'
       true
     else
       puts 'ERROR, based on number of trains and log'
       false
+    end
+  end
+
+  def valid_enemy_cards_number?
+    unless enemy_left_cards
+      puts 'Skipping validate as no state from JS'
+      return true
+    end
+
+    if enemy_left_cards == enemy_cards.values.sum
+      puts 'Valid JS state of game with sync of history actions'
+      true
+    else
+      puts 'Invalid JS state of game with sync of history actions'
     end
   end
 
@@ -95,7 +112,7 @@ class State
 
   attr_reader :enemy_cards, :enemy_used_cards,  :enemy_left_trains,
               :my_left_trains, :my_cards, :my_used_cards,
-              :start_setup, :visible_cards
+              :start_setup, :visible_cards, :my_left_cards, :enemy_left_cards
 
   def my_used_cards_number
     my_used_cards.values.sum
