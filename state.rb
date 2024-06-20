@@ -71,6 +71,8 @@ class State
     end
   end
 
+  # maybe I had to read data IN JS from gameui.trainCarCardCounters  instead of gameui.gamedatas ?!
+
   # algorithm: based on enemy moves find out where the JSON UI state is and skip validation there,
   # just continue with history
 
