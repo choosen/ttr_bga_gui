@@ -1,16 +1,16 @@
 {
     "visible_cards": {
-        "1": 2,
+        "0": 1,
         "4": 1,
+        "6": 1,
         "8": 2
     },
     "start_setup": {
         "0": 3,
-        "1": 5,
         "2": 4,
-        "3": 5,
-        "4": 6,
-        "5": 7,
+        "3": 1,
+        "4": 1,
+        "5": 1,
         "6": 3,
         "7": 4,
         "8": 3
@@ -18,17 +18,29 @@
     "player_stats": [
         {
             "id": "92902589",
-            "remainingTrainCarsCount": 45,
+            "remainingTrainCarsCount": 24,
             "name": "menettm",
-            "trainCarsCount": 42,
-            "claimedRoutes": []
+            "trainCarsCount": 23,
+            "claimedRoutes": [
+                "Calgary",
+                "Winnipeg",
+                "Montréal",
+                "Sault St. Marie",
+                "Helena"
+            ]
         },
         {
             "id": "95232426",
-            "remainingTrainCarsCount": 45,
+            "remainingTrainCarsCount": 23,
             "name": "chooosen",
-            "trainCarsCount": 40,
-            "claimedRoutes": []
+            "trainCarsCount": 20,
+            "claimedRoutes": [
+                "Calgary",
+                "Seattle",
+                "Duluth",
+                "Helena",
+                "Toronto"
+            ]
         }
     ]
 }

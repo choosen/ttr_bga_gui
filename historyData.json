@@ -1656,6 +1656,713 @@
                         "h": "082c10"
                     }
                 ]
+            },
+            {
+                "channel": "/player/p95232426",
+                "table_id": "526683833",
+                "packet_id": "98",
+                "packet_type": "history",
+                "move_id": "53",
+                "time": "1718923731",
+                "data": [
+                    {
+                        "uid": "6674b1d337416",
+                        "type": "trainCarPicked",
+                        "log": "You take hidden train car card(s) ${colors}",
+                        "args": {
+                            "colors": [
+                                4
+                            ]
+                        },
+                        "synchro": 1,
+                        "lock_uuid": "0c30a13e-0ef4-4c5b-8aeb-f530456f67a2",
+                        "h": "6d8bb3"
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "99",
+                "packet_type": "history",
+                "move_id": "53",
+                "time": "1718923731",
+                "data": [
+                    {
+                        "uid": "6674b1d33736f",
+                        "type": "trainCarPicked",
+                        "log": "${player_name} takes ${count} hidden train car card(s)",
+                        "args": {
+                            "player_name": "chooosen",
+                            "count": 1
+                        },
+                        "h": "6d8bb3"
+                    }
+                ]
+            },
+            {
+                "channel": "/player/p95232426",
+                "table_id": "526683833",
+                "packet_id": "100",
+                "packet_type": "history",
+                "move_id": "54",
+                "time": "1718923735",
+                "data": [
+                    {
+                        "uid": "6674b1d779ec8",
+                        "type": "trainCarPicked",
+                        "log": "You take hidden train car card(s) ${colors}",
+                        "args": {
+                            "colors": [
+                                0
+                            ]
+                        },
+                        "synchro": 1,
+                        "lock_uuid": "1b387104-a8a1-42df-821b-c543aac27020",
+                        "h": "c13c92"
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "101",
+                "packet_type": "history",
+                "move_id": "54",
+                "time": "1718923735",
+                "data": [
+                    {
+                        "uid": "6674b1d779e1a",
+                        "type": "trainCarPicked",
+                        "log": "${player_name} takes ${count} hidden train car card(s)",
+                        "args": {
+                            "player_name": "chooosen",
+                            "count": 1
+                        },
+                        "h": "c13c92"
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "102",
+                "packet_type": "history",
+                "move_id": "55",
+                "time": "1718923755",
+                "data": [
+                    {
+                        "uid": "6674b1ebbb570",
+                        "type": "trainCarPicked",
+                        "log": "${player_name} takes ${color}",
+                        "args": {
+                            "player_name": "menettm",
+                            "color": 1
+                        },
+                        "h": "2f985f"
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "103",
+                "packet_type": "history",
+                "move_id": "56",
+                "time": "1718923760",
+                "data": [
+                    {
+                        "uid": "6674b1f0240e3",
+                        "type": "trainCarPicked",
+                        "log": "${player_name} takes ${color}",
+                        "args": {
+                            "player_name": "menettm",
+                            "color": 1
+                        },
+                        "h": "40fdc1"
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "104",
+                "packet_type": "history",
+                "move_id": "57",
+                "time": "1718923782",
+                "data": [
+                    {
+                        "uid": "6674b20680a8f",
+                        "type": "claimedRoute",
+                        "log": "${player_name} gains ${points} point(s) by claiming route from ${from} to ${to} with ${number} train car(s) : ${colors}",
+                        "args": {
+                            "player_name": "chooosen",
+                            "points": 15,
+                            "route": {
+                                "id": 42,
+                                "from": 8,
+                                "to": 33,
+                                "number": 6,
+                                "color": 1,
+                                "tunnel": false,
+                                "locomotives": 0,
+                                "spaces": [
+                                    {
+                                        "x": 1041,
+                                        "y": 321,
+                                        "angle": -8,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1105,
+                                        "y": 310,
+                                        "angle": -8,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1170,
+                                        "y": 298,
+                                        "angle": -8,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1235,
+                                        "y": 288,
+                                        "angle": -8,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1298,
+                                        "y": 277,
+                                        "angle": -8,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1364,
+                                        "y": 265,
+                                        "angle": -8,
+                                        "top": false
+                                    }
+                                ]
+                            },
+                            "from": "Duluth",
+                            "to": "Toronto",
+                            "number": 6,
+                            "colors": [
+                                1,
+                                1,
+                                1,
+                                1,
+                                1,
+                                0
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "105",
+                "packet_type": "history",
+                "move_id": "58",
+                "time": "1718923806",
+                "data": [
+                    {
+                        "uid": "6674b21e3ad77",
+                        "type": "claimedRoute",
+                        "log": "${player_name} gains ${points} point(s) by claiming route from ${from} to ${to} with ${number} train car(s) : ${colors}",
+                        "args": {
+                            "player_name": "menettm",
+                            "points": 15,
+                            "route": {
+                                "id": 96,
+                                "from": 29,
+                                "to": 36,
+                                "number": 6,
+                                "color": 0,
+                                "tunnel": false,
+                                "locomotives": 0,
+                                "spaces": [
+                                    {
+                                        "x": 853,
+                                        "y": 123,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 917,
+                                        "y": 136,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 981,
+                                        "y": 149,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1044,
+                                        "y": 163,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1107,
+                                        "y": 177,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1171,
+                                        "y": 189,
+                                        "angle": 12,
+                                        "top": false
+                                    }
+                                ]
+                            },
+                            "from": "Sault St. Marie",
+                            "to": "Winnipeg",
+                            "number": 6,
+                            "colors": [
+                                8,
+                                8,
+                                8,
+                                8,
+                                8,
+                                8
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "106",
+                "packet_type": "history",
+                "move_id": "59",
+                "time": "1718923939",
+                "data": [
+                    {
+                        "uid": "6674b2a389f32",
+                        "type": "claimedRoute",
+                        "log": "${player_name} gains ${points} point(s) by claiming route from ${from} to ${to} with ${number} train car(s) : ${colors}",
+                        "args": {
+                            "player_name": "chooosen",
+                            "points": 15,
+                            "route": {
+                                "id": 38,
+                                "from": 8,
+                                "to": 10,
+                                "number": 6,
+                                "color": 5,
+                                "tunnel": false,
+                                "locomotives": 0,
+                                "spaces": [
+                                    {
+                                        "x": 613,
+                                        "y": 338,
+                                        "angle": -1,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 679,
+                                        "y": 338,
+                                        "angle": -1,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 745,
+                                        "y": 337,
+                                        "angle": -1,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 810,
+                                        "y": 336,
+                                        "angle": -1,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 876,
+                                        "y": 335,
+                                        "angle": -1,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 942,
+                                        "y": 334,
+                                        "angle": -1,
+                                        "top": false
+                                    }
+                                ]
+                            },
+                            "from": "Duluth",
+                            "to": "Helena",
+                            "number": 6,
+                            "colors": [
+                                5,
+                                5,
+                                5,
+                                5,
+                                5,
+                                5
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "107",
+                "packet_type": "history",
+                "move_id": "60",
+                "time": "1718923970",
+                "data": [
+                    {
+                        "uid": "6674b2c2082df",
+                        "type": "claimedRoute",
+                        "log": "${player_name} gains ${points} point(s) by claiming route from ${from} to ${to} with ${number} train car(s) : ${colors}",
+                        "args": {
+                            "player_name": "menettm",
+                            "points": 15,
+                            "route": {
+                                "id": 14,
+                                "from": 3,
+                                "to": 36,
+                                "number": 6,
+                                "color": 2,
+                                "tunnel": false,
+                                "locomotives": 0,
+                                "spaces": [
+                                    {
+                                        "x": 428,
+                                        "y": 84,
+                                        "angle": -23,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 490,
+                                        "y": 65,
+                                        "angle": -11,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 555,
+                                        "y": 55,
+                                        "angle": -2,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 622,
+                                        "y": 56,
+                                        "angle": 4,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 687,
+                                        "y": 69,
+                                        "angle": 15,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 747,
+                                        "y": 91,
+                                        "angle": 25,
+                                        "top": false
+                                    }
+                                ]
+                            },
+                            "from": "Calgary",
+                            "to": "Winnipeg",
+                            "number": 6,
+                            "colors": [
+                                2,
+                                2,
+                                2,
+                                2,
+                                2,
+                                2
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "108",
+                "packet_type": "history",
+                "move_id": "61",
+                "time": "1718924135",
+                "data": [
+                    {
+                        "uid": "6674b367230fe",
+                        "type": "claimedRoute",
+                        "log": "${player_name} gains ${points} point(s) by claiming route from ${from} to ${to} with ${number} train car(s) : ${colors}",
+                        "args": {
+                            "player_name": "chooosen",
+                            "points": 15,
+                            "route": {
+                                "id": 51,
+                                "from": 10,
+                                "to": 32,
+                                "number": 6,
+                                "color": 4,
+                                "tunnel": false,
+                                "locomotives": 0,
+                                "spaces": [
+                                    {
+                                        "x": 186,
+                                        "y": 263,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 250,
+                                        "y": 278,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 313,
+                                        "y": 292,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 377,
+                                        "y": 307,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 440,
+                                        "y": 321,
+                                        "angle": 12,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 504,
+                                        "y": 335,
+                                        "angle": 12,
+                                        "top": false
+                                    }
+                                ]
+                            },
+                            "from": "Helena",
+                            "to": "Seattle",
+                            "number": 6,
+                            "colors": [
+                                4,
+                                4,
+                                4,
+                                4,
+                                4,
+                                4
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "109",
+                "packet_type": "history",
+                "move_id": "62",
+                "time": "1718924156",
+                "data": [
+                    {
+                        "uid": "6674b37c04c7b",
+                        "type": "claimedRoute",
+                        "log": "${player_name} gains ${points} point(s) by claiming route from ${from} to ${to} with ${number} train car(s) : ${colors}",
+                        "args": {
+                            "player_name": "menettm",
+                            "points": 10,
+                            "route": {
+                                "id": 71,
+                                "from": 17,
+                                "to": 29,
+                                "number": 5,
+                                "color": 6,
+                                "tunnel": false,
+                                "locomotives": 0,
+                                "spaces": [
+                                    {
+                                        "x": 1264,
+                                        "y": 173,
+                                        "angle": -40,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1318,
+                                        "y": 137,
+                                        "angle": -28,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1377,
+                                        "y": 111,
+                                        "angle": -19,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1442,
+                                        "y": 93,
+                                        "angle": -13,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 1507,
+                                        "y": 86,
+                                        "angle": 0,
+                                        "top": false
+                                    }
+                                ]
+                            },
+                            "from": "Montréal",
+                            "to": "Sault St. Marie",
+                            "number": 5,
+                            "colors": [
+                                6,
+                                6,
+                                6,
+                                6,
+                                6
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "110",
+                "packet_type": "history",
+                "move_id": "63",
+                "time": "1718926132",
+                "data": [
+                    {
+                        "uid": "6674bb34a67c2",
+                        "type": "claimedRoute",
+                        "log": "${player_name} gains ${points} point(s) by claiming route from ${from} to ${to} with ${number} train car(s) : ${colors}",
+                        "args": {
+                            "player_name": "chooosen",
+                            "points": 7,
+                            "route": {
+                                "id": 12,
+                                "from": 3,
+                                "to": 32,
+                                "number": 4,
+                                "color": 0,
+                                "tunnel": false,
+                                "locomotives": 0,
+                                "spaces": [
+                                    {
+                                        "x": 191,
+                                        "y": 229,
+                                        "angle": 0,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 257,
+                                        "y": 225,
+                                        "angle": -7,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 318,
+                                        "y": 201,
+                                        "angle": -37,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 361,
+                                        "y": 149,
+                                        "angle": -63,
+                                        "top": false
+                                    }
+                                ]
+                            },
+                            "from": "Calgary",
+                            "to": "Seattle",
+                            "number": 4,
+                            "colors": [
+                                3,
+                                3,
+                                3,
+                                3
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "channel": "/table/t526683833",
+                "table_id": "526683833",
+                "packet_id": "111",
+                "packet_type": "history",
+                "move_id": "64",
+                "time": "1718943134",
+                "data": [
+                    {
+                        "uid": "6674fd9ebc417",
+                        "type": "claimedRoute",
+                        "log": "${player_name} gains ${points} point(s) by claiming route from ${from} to ${to} with ${number} train car(s) : ${colors}",
+                        "args": {
+                            "player_name": "menettm",
+                            "points": 7,
+                            "route": {
+                                "id": 100,
+                                "from": 3,
+                                "to": 10,
+                                "number": 4,
+                                "color": 0,
+                                "tunnel": false,
+                                "locomotives": 0,
+                                "spaces": [
+                                    {
+                                        "x": 414,
+                                        "y": 145,
+                                        "angle": 50,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 457,
+                                        "y": 196,
+                                        "angle": 50,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 498,
+                                        "y": 245,
+                                        "angle": 50,
+                                        "top": false
+                                    },
+                                    {
+                                        "x": 540,
+                                        "y": 295,
+                                        "angle": 50,
+                                        "top": false
+                                    }
+                                ]
+                            },
+                            "from": "Calgary",
+                            "to": "Helena",
+                            "number": 4,
+                            "colors": [
+                                1,
+                                1,
+                                1,
+                                1
+                            ]
+                        }
+                    }
+                ]
             }
         ]
     }
