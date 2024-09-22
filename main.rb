@@ -45,7 +45,7 @@ state = State.parse_js # setup by hand in stateInitializer.rb:39
 
 ready_packets.each { |packet| packet.call state }
 
-state.output_current_state
+state.output_current_state if ENV["DEBUG"]
 if state.valid?
   puts state.export_to_excel
   puts "enemy is #{packets.detect { |packet| !packet.me? }.player}"

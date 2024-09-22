@@ -39,7 +39,9 @@ module StateInitializer
       { visible_cards:, start_setup:, player_stats: }
 
     my_stats, other_stats = player_stats.partition { |stat| stat[:name] == MY_NAME }
-    ap player_stats
+
+    ap player_stats if ENV["DEBUG"]
+
     my_left_trains = my_stats[0].fetch(:remainingTrainCarsCount)
     my_left_cards = my_stats[0].fetch(:trainCarsCount)
     enemy_left_trains = other_stats[0].fetch(:remainingTrainCarsCount)
@@ -50,7 +52,7 @@ module StateInitializer
     visible_cards.transform_keys! { |key| NUMBER_TO_COLORS_MAPPING.fetch(key.to_s.to_i) }
     start_setup.transform_keys! { |key| NUMBER_TO_COLORS_MAPPING.fetch(key.to_s.to_i) }
     params = {my_left_trains:, enemy_left_trains:, my_left_cards:, enemy_left_cards:}
-    ap(params.merge({visible_cards:, start_setup:}))
+    ap params.merge({visible_cards:, start_setup:}) if ENV["DEBUG"]
     new(visible_cards, start_setup, **params)
   end
 end
