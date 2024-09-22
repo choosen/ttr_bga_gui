@@ -1,10 +1,10 @@
-require_relative 'stateInitializer'
+require_relative "stateInitializer"
 
 class State
   extend StateInitializer
 
   def initialize(visible_cards, start_setup, my_left_trains:, enemy_left_trains:,
-                 my_left_cards: nil, enemy_left_cards: nil)
+    my_left_cards: nil, enemy_left_cards: nil)
     @visible_cards = visible_cards
     @my_cards = COLORS_MAPPING.keys.zip([0] * COLORS_MAPPING.keys.length).to_h
     @start_setup = start_setup
@@ -63,10 +63,10 @@ class State
     valid_card_trains_and_used_cards =
       45 * 2 - (my_left_trains + enemy_left_trains) == my_used_cards_number + enemy_used_cards.values.sum
     if valid_enemy_cards_number? && valid_card_trains_and_used_cards
-      puts 'All Valid, based on number of trains and log'
+      puts "All Valid, based on number of trains and log"
       true
     else
-      puts 'ERROR, based on number of trains and log'
+      puts "ERROR, based on number of trains and log"
       false
     end
   end
@@ -84,15 +84,15 @@ class State
 
   def valid_enemy_cards_number?
     unless enemy_left_cards
-      puts 'Skipping validate as no state from JS'
+      puts "Skipping validate as no state from JS"
       return true
     end
 
     if enemy_left_cards == enemy_cards.values.sum
-      puts 'Valid JS state of game with sync of history actions'
+      puts "Valid JS state of game with sync of history actions"
       true
     else
-      puts 'Invalid JS state of game with sync of history actions'
+      puts "Invalid JS state of game with sync of history actions"
     end
   end
 
@@ -102,7 +102,7 @@ class State
         (my_used_cards[color] + enemy_used_cards[color]).then(&method(:replace_zero_with_empty_string)),
         my_cards_with_js_load_fix[color].then(&method(:replace_zero_with_empty_string)),
         enemy_cards[color].then(&method(:replace_zero_with_empty_string)),
-        visible_cards[color].then(&method(:replace_zero_with_empty_string)) || '',
+        visible_cards[color].then(&method(:replace_zero_with_empty_string)) || ""
       ]
       row.join("\t")
     end.join "\n"
@@ -112,18 +112,18 @@ class State
     enemy_moves = COLORS_MAPPING.each_key.map do |color|
       enemy_used_cards[color].then(&method(:replace_zero_with_empty_string))
     end
-    return puts '> No visible cards from user <' if enemy_moves.all? { |value| value == '' }
+    return puts "> No visible cards from user <" if enemy_moves.all? { |value| value == "" }
 
-    puts 'Enemy moves:'
+    puts "Enemy moves:"
     puts enemy_moves.join "\n"
     # todo: My card visible to enemy
   end
 
   private
 
-  attr_reader :enemy_cards, :enemy_used_cards,  :enemy_left_trains,
-              :my_left_trains, :my_cards, :my_used_cards,
-              :start_setup, :visible_cards, :my_left_cards, :enemy_left_cards
+  attr_reader :enemy_cards, :enemy_used_cards, :enemy_left_trains,
+    :my_left_trains, :my_cards, :my_used_cards,
+    :start_setup, :visible_cards, :my_left_cards, :enemy_left_cards
 
   def my_used_cards_number
     my_used_cards.values.sum
@@ -136,12 +136,12 @@ class State
       start_setup # start setup is current state also
     end
   end
-      # initial_cards_number = start_setup.values.sum + my_used_cards.values.sum # valid only if state was collected with notification history
-      # stan_obecny = stan poczatkowy + dodane_karty - uzyte karty
-      # stan poczatkowy = stan_obecny - dodane_karty + uzyte karty
-      # tylko nadal nie wiemy czy stan obecny jest z JS zawsze, wykrywanie tego moze byc trudne
+  # initial_cards_number = start_setup.values.sum + my_used_cards.values.sum # valid only if state was collected with notification history
+  # stan_obecny = stan poczatkowy + dodane_karty - uzyte karty
+  # stan poczatkowy = stan_obecny - dodane_karty + uzyte karty
+  # tylko nadal nie wiemy czy stan obecny jest z JS zawsze, wykrywanie tego moze byc trudne
 
   def replace_zero_with_empty_string(value)
-    value == 0 ? '' : value
+    (value == 0) ? "" : value
   end
 end

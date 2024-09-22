@@ -1,4 +1,4 @@
-require_relative 'state'
+require_relative "state"
 
 # types of history entries:
 
@@ -14,12 +14,13 @@ require_relative 'state'
 
 PacketData = Data.define(:channel, :packet_type, :move_id, :time, :data, :table_id)
 
-MY_NAME = 'chooosen'.freeze
+MY_NAME = "chooosen".freeze
 
 class BasePacket
   def initialize(hash)
     @packet_data = PacketData.new(**hash.except(:packet_id))
   end
+
   # def call; end
   def packet_type
     packet_data.packet_type
@@ -30,7 +31,7 @@ class BasePacket
   end
 
   def global?
-    packet_data.channel.include? 'table' #  ? :global : :private
+    packet_data.channel.include? "table" #  ? :global : :private
   end
 
   def me?
@@ -63,12 +64,13 @@ class ClaimedRoute < BasePacket
     color_number = (colors_a - [COLORS_MAPPING.fetch(:Locomotive)])[0] || COLORS_MAPPING.fetch(:Locomotive)
     color = NUMBER_TO_COLORS_MAPPING[color_number]
     if me?
-      return state.my_card_use color: , length:, locomotives:
+      return state.my_card_use color:, length:, locomotives:
     end
 
-    return state.enemy_card_use color: , length: , locomotives:
+    state.enemy_card_use color:, length:, locomotives:
   end
 end
+
 class TrainCarPicked < BasePacket
   def call(state)
     color = data.dig(:args, :color) # visible one
@@ -88,7 +90,6 @@ class TrainCarPicked < BasePacket
     state.enemy_take_card
   end
 end
-
 
 class SimpleNote < BasePacket
   def call(*)

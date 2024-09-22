@@ -1,14 +1,14 @@
-require_relative 'packets'
-require_relative 'state'
-require_relative 'PacketFactory'
-require 'json'
-require 'active_support'
+require_relative "packets"
+require_relative "state"
+require_relative "PacketFactory"
+require "json"
+require "active_support"
 require "active_support/core_ext/array"
 require "active_support/core_ext/hash"
 
-require 'date'
-require 'amazing_print'
-require 'debug'
+require "date"
+require "amazing_print"
+require "debug"
 
 # https://boardgamearena.com/10/tickettoride/tickettoride/notificationHistory.html?table=500450283&from=108&privateinc=1&history=1&noerrortracking=true&dojo.preventCache=1713452046818
 # url to search for, tab Preview, click right mouse button on top object and select: copy object.
@@ -18,9 +18,9 @@ require 'debug'
 
 DECK_CARDS_NO = 110
 
-input = JSON.load_file('historyData.json').deep_symbolize_keys!
+input = JSON.load_file("historyData.json").deep_symbolize_keys!
 
-packets = input.dig(:data,:data).map { |entry| PacketFactory.create entry }
+packets = input.dig(:data, :data).map { |entry| PacketFactory.create entry }
 
 actionable_packets = packets.select { |packet| [ClaimedRoute, TrainCarPicked].include? packet.class }
 
@@ -48,9 +48,9 @@ ready_packets.each { |packet| packet.call state }
 state.output_current_state
 if state.valid?
   puts state.export_to_excel
-  puts "enemy is #{packets.detect { |packet| !packet.me?}.player}"
+  puts "enemy is #{packets.detect { |packet| !packet.me? }.player}"
   puts "Game/Table id is #{packets[0].table_id}"
-  puts "Game started by #{ready_packets&.first&.player || '//waiting for first move'}"
+  puts "Game started by #{ready_packets&.first&.player || "//waiting for first move"}"
   puts
   state.export_enemy_moves_excel
 end
