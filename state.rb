@@ -1,4 +1,4 @@
-require_relative "stateInitializer"
+require_relative "state_initializer"
 
 class State
   extend StateInitializer

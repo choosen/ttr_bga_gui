@@ -1,6 +1,6 @@
 require_relative "packets"
 require_relative "state"
-require_relative "PacketFactory"
+require_relative "packet_factory"
 require "json"
 require "active_support"
 require "active_support/core_ext/array"
