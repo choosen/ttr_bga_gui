@@ -16,8 +16,6 @@ require "debug"
 # adjust state: visible_cards, left_trains, start_setup
 # and run script
 
-DECK_CARDS_NO = 110
-
 input = JSON.load_file("historyData.json").deep_symbolize_keys!
 
 packets = input.dig(:data, :data).map { |entry| PacketFactory.create entry }

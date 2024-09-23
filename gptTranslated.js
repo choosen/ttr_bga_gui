@@ -3250,9 +3250,6 @@ const input = {
 
 // Main function equivalent
 function main(input) {
-    const DECK_CARDS_NO = 110;
-
-
     const packets = input.data.data.map(entry => PacketFactory.create(entry));
 
     const actionable_packets = packets.filter(packet => [ClaimedRoute, TrainCarPicked].includes(packet.constructor));
