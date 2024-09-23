@@ -1,39 +1,54 @@
 {
     "visible_cards": {
         "0": 1,
-        "1": 1,
-        "3": 1,
         "4": 1,
-        "5": 1
+        "6": 1,
+        "8": 2
     },
     "start_setup": {
-        "0": 4,
-        "1": 5,
-        "2": 3,
-        "3": 2,
-        "4": 7,
-        "5": 5,
-        "6": 5,
-        "7": 5,
-        "8": 6
+        "2": 4,
+        "4": 1,
+        "8": 3
     },
     "player_stats": [
         {
-            "id": "89487798",
-            "remainingTrainCarsCount": 44,
-            "name": "Fredij",
-            "trainCarsCount": 41,
+            "id": "92902589",
+            "remainingTrainCarsCount": 13,
+            "name": "menettm",
+            "trainCarsCount": 12,
             "claimedRoutes": [
-                "Atlanta",
-                "Nashville"
+                "Calgary",
+                "Winnipeg",
+                "Montréal",
+                "Sault St. Marie",
+                "Toronto",
+                "Nashville",
+                "Saint Louis",
+                "New York",
+                "Pittsburgh",
+                "Raleigh",
+                "Washington",
+                "Helena"
             ]
         },
         {
             "id": "95232426",
-            "remainingTrainCarsCount": 45,
+            "remainingTrainCarsCount": 11,
             "name": "chooosen",
-            "trainCarsCount": 42,
-            "claimedRoutes": []
+            "trainCarsCount": 8,
+            "claimedRoutes": [
+                "Calgary",
+                "Seattle",
+                "Duluth",
+                "Helena",
+                "Toronto",
+                "Montréal",
+                "New York",
+                "Nashville",
+                "Raleigh",
+                "Washington",
+                "Pittsburgh"
+            ]
         }
     ]
 }
