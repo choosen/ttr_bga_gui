@@ -365,9 +365,37 @@ class State {
     }
 }
 
+// Main function equivalent
+function main(input) {
+    const packets = input.data.data.map(entry => PacketFactory.create(entry));
+
+    const actionable_packets = packets.filter(packet => [ClaimedRoute, TrainCarPicked].includes(packet.constructor));
+
+    const global_packets = actionable_packets.filter(packet => packet.global);
+    const my_packets = actionable_packets.filter(packet => !packet.global);
+
+    my_packets.forEach(packet => {
+        const index = global_packets.findIndex(g_packet => g_packet.move_id === packet.move_id);
+        global_packets[index] = packet;
+    });
+
+    const ready_packets = global_packets;
+
+    const state = State.parse_js();
+
+    ready_packets.forEach(packet => packet.call(state));
+
+    if (state.valid()) {
+        console.log(state.export_to_excel());
+        console.log(`enemy is ${ready_packets.find(packet => !packet.me).player}`);
+        console.log(`Game/Table id is ${packets[0].table_id}`);
+        console.log(`Game started by ${ready_packets?.[0]?.player || "//waiting for first move"}`);
+        state.export_enemy_moves_excel();
+    }
+}
 
 // TODO: take input from ChatHistory response
-const input = {
+const ChatHistory = {
     "status": 1,
     "data": {
         "valid": 1,
@@ -3248,33 +3276,4 @@ const input = {
     }
 };
 
-// Main function equivalent
-function main(input) {
-    const packets = input.data.data.map(entry => PacketFactory.create(entry));
-
-    const actionable_packets = packets.filter(packet => [ClaimedRoute, TrainCarPicked].includes(packet.constructor));
-
-    const global_packets = actionable_packets.filter(packet => packet.global);
-    const my_packets = actionable_packets.filter(packet => !packet.global);
-
-    my_packets.forEach(packet => {
-        const index = global_packets.findIndex(g_packet => g_packet.move_id === packet.move_id);
-        global_packets[index] = packet;
-    });
-
-    const ready_packets = global_packets;
-
-    const state = State.parse_js();
-
-    ready_packets.forEach(packet => packet.call(state));
-
-    if (state.valid()) {
-        console.log(state.export_to_excel());
-        console.log(`enemy is ${ready_packets.find(packet => !packet.me).player}`);
-        console.log(`Game/Table id is ${packets[0].table_id}`);
-        console.log(`Game started by ${ready_packets?.[0]?.player || "//waiting for first move"}`);
-        state.export_enemy_moves_excel();
-    }
-}
-
-main(input);
+main(ChatHistory);
