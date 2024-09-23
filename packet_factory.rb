@@ -2,13 +2,11 @@ module PacketFactory
   def self.create(hash)
     case hash
     in { data: [{type: move_type}, {type: "highlightVisibleLocomotives"}, *] }
-      Object.const_get("#{move_type[0].upcase}#{move_type[1..-1]}").new(hash)
+      Object.const_get("#{move_type.camelize}").new(hash)
     in { data: [_, _, *] }
       raise "We do not support multiple data other than highlightVisibleLocomotives in packet #{hash}"
     in { data: [{type: move_type}] }
-      # move_type.camelize.constantize.new(hash)
-      # "#{move_type[0].upcase}#{move_type[1..-1]}".constantize.new(hash)
-      Object.const_get("#{move_type[0].upcase}#{move_type[1..-1]}").new(hash)
+      Object.const_get("#{move_type.camelize}").new(hash)
     in { data: [{}] }
       raise "Missing move type #{hash}"
     in { data: [] }
@@ -20,3 +18,19 @@ module PacketFactory
     end
   end
 end
+
+# CHAT GPT 'BETTER' VERSION
+# module PacketFactory
+#   def self.create(hash)
+#     case hash
+#     in { data: [{ type: move_type }, { type: "highlightVisibleLocomotives" }, *] }
+#       Object.const_get("#{move_type.capitalize}").new(hash)
+#     in { data: [{ type: move_type }] }
+#       Object.const_get("#{move_type.capitalize}").new(hash)
+#     in { data: [_, _, *] } | { data: [{}] } | { data: [] }
+#       raise "Invalid or unsupported packet data #{hash}"
+#     else
+#       raise "Missing data in packet #{hash}"
+#     end
+#   end
+# end
