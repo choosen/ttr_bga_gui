@@ -1,7 +1,5 @@
-// MY_NAME constant
 const MY_NAME = Object.freeze("chooosen");
 
-// COLORS_MAPPING and NUMBER_TO_COLORS_MAPPING
 const COLORS_MAPPING = Object.freeze({
     Locomotive: 0,
     Pink: 1,
@@ -18,7 +16,6 @@ const NUMBER_TO_COLORS_MAPPING = Object.fromEntries(
     Object.entries(COLORS_MAPPING).map(([key, value]) => [value, key])
 );
 
-// BasePacket class
 class BasePacket {
     #packet_data;
 
@@ -60,7 +57,6 @@ class BasePacket {
     }
 }
 
-// ClaimedRoute class
 class ClaimedRoute extends BasePacket {
     call(state) {
         const { args: { number: length, colors: colors_a } } = this.data;
@@ -77,7 +73,6 @@ class ClaimedRoute extends BasePacket {
     }
 }
 
-// TrainCarPicked class
 class TrainCarPicked extends BasePacket {
     call(state) {
         const args = this.data?.args;
@@ -109,7 +104,6 @@ class TrainCarPicked extends BasePacket {
     }
 }
 
-// SimpleNote class
 class SimpleNote extends BasePacket {
     call() {
         console.log(this.data.log);
@@ -131,7 +125,6 @@ let handler = {
 }
 const WithDefaultValuePacketClasses = new Proxy(PacketClasses, handler)
 
-// PacketFactory module
 const PacketFactory = {
     create(hash) {
         switch (true) {
@@ -160,64 +153,10 @@ const PacketFactory = {
     }
 };
 
-// State class
 class State {
     static parse_js() {
         // TODO: get formatted data from Window
-        const data = {
-            "visible_cards": {
-                "0": 1,
-                "4": 1,
-                "6": 1,
-                "8": 2
-            },
-            "start_setup": {
-                "2": 4,
-                "4": 1,
-                "8": 3
-            },
-            "player_stats": [
-                {
-                    "id": "92902589",
-                    "remainingTrainCarsCount": 13,
-                    "name": "menettm",
-                    "trainCarsCount": 12,
-                    "claimedRoutes": [
-                        "Calgary",
-                        "Winnipeg",
-                        "Montréal",
-                        "Sault St. Marie",
-                        "Toronto",
-                        "Nashville",
-                        "Saint Louis",
-                        "New York",
-                        "Pittsburgh",
-                        "Raleigh",
-                        "Washington",
-                        "Helena"
-                    ]
-                },
-                {
-                    "id": "95232426",
-                    "remainingTrainCarsCount": 11,
-                    "name": "chooosen",
-                    "trainCarsCount": 8,
-                    "claimedRoutes": [
-                        "Calgary",
-                        "Seattle",
-                        "Duluth",
-                        "Helena",
-                        "Toronto",
-                        "Montréal",
-                        "New York",
-                        "Nashville",
-                        "Raleigh",
-                        "Washington",
-                        "Pittsburgh"
-                    ]
-                }
-            ]
-        };
+        const data = window.result;
 
         let { visible_cards, start_setup, player_stats } = data;
 
